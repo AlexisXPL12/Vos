@@ -4,33 +4,179 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Productos – VOS Y SOLO VOS</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <!-- Tu CSS personalizado -->
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/script.js" defer></script>
-</head>
-<body>
-  <div id="header"></div>
+  <style>
+    /* Estilo para las tarjetas de productos */
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
 
-  <section class="productos">
-    <h2>Nuestros Muebles</h2>
-    <div class="grid">
-      <div class="item">
-        <img src="img/muebles1.jpg" alt="Sofá moderno">
-        <h3>Sofá Moderno</h3>
-        <p>Confort y elegancia en tu sala.</p>
-      </div>
-      <div class="item">
-        <img src="img/muebles2.jpg" alt="Mesa de comedor">
-        <h3>Mesa de Comedor</h3>
-        <p>Diseño que une a la familia.</p>
-      </div>
-      <div class="item">
-        <img src="img/muebles3.jpg" alt="Cama Premium">
-        <h3>Cama Premium</h3>
-        <p>Duerme con el máximo confort.</p>
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-img-top {
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .btn-dark {
+      background-color: #3e2723;
+      border-color: #3e2723;
+    }
+
+    .btn-dark:hover {
+      background-color: #2d1b18;
+      border-color: #2d1b18;
+    }
+
+    .productos {
+      padding: 60px 0;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <!-- Header dinámico -->
+  <header id="header"></header>
+
+  <!-- Sección de productos -->
+  <section class="productos py-5">
+    <div class="container text-center">
+      <h2 class="display-6 fw-bold mb-5">Nuestros Muebles</h2>
+      <div class="row g-4">
+        <!-- Producto 1: Sofá moderno -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=600"
+              class="card-img-top"
+              alt="Sofá moderno"
+            >
+            <div class="card-body">
+              <h3 class="card-title">Sofá Moderno</h3>
+              <p class="card-text">Confort y elegancia en tu sala. Diseño ergonómico y materiales de alta calidad.</p>
+              <a href="#" class="btn btn-dark">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 2: Mesa de comedor -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=600"
+              class="card-img-top"
+              alt="Mesa de comedor"
+            >
+            <div class="card-body">
+              <h3 class="card-title">Mesa de Comedor</h3>
+              <p class="card-text">Diseño que une a la familia. Fabricada en madera maciza con acabado premium.</p>
+              <a href="#" class="btn btn-dark">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 3: Cama premium -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://images.pexels.com/photos/271795/pexels-photo-271795.jpeg?auto=compress&cs=tinysrgb&w=600"
+              class="card-img-top"
+              alt="Cama Premium"
+            >
+            <div class="card-body">
+              <h3 class="card-title">Cama Premium</h3>
+              <p class="card-text">Duerme con el máximo confort. Colchón ortopédico y estructura resistente.</p>
+              <a href="#" class="btn btn-dark">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 4: Silla ergonómica -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://http2.mlstatic.com/D_NQ_NP_985712-MPE76952060995_062024-O-silla-ergonomica-de-oficina-silla-de-computadora-ejec.webp"
+              class="card-img-top"
+              alt="Silla ergonómica"
+            >
+            <div class="card-body">
+              <h3 class="card-title">Silla Ergonómica</h3>
+              <p class="card-text">Ideal para oficina o hogar. Ajustable y con soporte lumbar.</p>
+              <a href="#" class="btn btn-dark">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 5: Estantería moderna -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://www.angelcerda.com/magazine/wp-content/uploads/2024/04/estanter%C3%ADa3220-650x420.jpg"
+              class="card-img-top"
+              alt="Estantería moderna"
+            >
+            <div class="card-body">
+              <h3 class="card-title">Estantería Moderna</h3>
+              <p class="card-text">Amplio espacio de almacenamiento. Diseño minimalista y resistente.</p>
+              <a href="#" class="btn btn-dark">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 6: Mueble de TV -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img
+              src="https://colineal.pe/cdn/shop/articles/ventajas-tener-mueble-tv-moderno.jpg?crop=center&height=1200&v=1676389831&width=1200"
+              class="card-img-top"
+              alt="Mueble de TV"
+            >
+            <div class="card-body">
+              <h3 class="card-title">Mueble de TV</h3>
+              <p class="card-text">Organiza tu sala de estar. Con compartimentos para accesorios.</p>
+              <a href="#" class="btn btn-dark">Ver detalles</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <div id="footer"></div>
+  <!-- Footer dinámico -->
+  <footer id="footer"></footer>
+
+  <!-- Bootstrap 5 JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Script para cargar header y footer -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
 </body>
 </html>

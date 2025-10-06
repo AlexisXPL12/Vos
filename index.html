@@ -3,39 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VOS Y SOLO VOS – Nuestro Hogar</title>
+  <meta name="description" content="Descubre muebles de diseño, calidad y confort para tu hogar en VOS Y SOLO VOS. Transformamos tus espacios en lugares únicos con estilo moderno y materiales premium.">
+  <title>VOS Y SOLO VOS – Diseño y Confort para tu Hogar</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tu CSS personalizado -->
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/script.js" defer></script>
+  <style>
+    /* Estilo para el hero con imagen de fondo */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1200');
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+    }
+
+    /* Estilo para las tarjetas de características */
+    .features .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .features .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilo para los botones */
+    .btn-warning {
+      background-color: #ffc107;
+      border-color: #ffc107;
+      color: #3e2723;
+      font-weight: 600;
+    }
+
+    .btn-dark {
+      background-color: #3e2723;
+      border-color: #3e2723;
+    }
+
+    /* Estilo para los testimonios */
+    .testimonials .card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
-<body>
-  <div id="header"></div>
+<body class="bg-light">
+  <!-- Header dinámico -->
+  <header id="header"></header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Bienvenido a VOS Y SOLO VOS</h1>
-      <p>Tu espacio ideal comienza aquí, donde el confort y el diseño se encuentran.</p>
-      <a href="productos.html" class="btn">Ver Catálogo</a>
+  <!-- Hero Section -->
+  <section class="hero d-flex align-items-center justify-content-center text-center text-white">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-3">Transforma tu hogar con estilo</h1>
+      <p class="fs-5 mb-4">En <strong>VOS Y SOLO VOS</strong>, creamos muebles que combinan diseño moderno, calidad excepcional y el confort que mereces. Cada pieza está pensada para hacer de tu espacio un lugar único.</p>
+      <a href="productos.html" class="btn btn-warning btn-lg px-4 py-2 fw-bold">Explorar Catálogo</a>
     </div>
   </section>
 
-  <section class="features">
-    <h2>Por qué elegirnos</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Diseño</h3>
-        <p>Muebles con estilo moderno, elegantes y duraderos.</p>
-      </div>
-      <div class="card">
-        <h3>Calidad</h3>
-        <p>Usamos materiales premium para cada pieza.</p>
-      </div>
-      <div class="card">
-        <h3>Comodidad</h3>
-        <p>Ergonomía y confort en cada rincón de tu hogar.</p>
+  <!-- Features Section -->
+  <section class="features py-5">
+    <div class="container text-center">
+      <h2 class="display-6 fw-bold mb-5">¿Por qué elegirnos?</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm p-4">
+            <div class="mb-3">
+              <i class="bi bi-palette fs-1" style="color: #ffc107;"></i>
+            </div>
+            <h3 class="mb-3">Diseño Único</h3>
+            <p>Muebles con líneas modernas y elegantes, diseñados para destacar en cualquier ambiente.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm p-4">
+            <div class="mb-3">
+              <i class="bi bi-star-fill fs-1" style="color: #ffc107;"></i>
+            </div>
+            <h3 class="mb-3">Calidad Premium</h3>
+            <p>Seleccionamos los mejores materiales para garantizar durabilidad y satisfacción.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm p-4">
+            <div class="mb-3">
+              <i class="bi bi-heart-fill fs-1" style="color: #ffc107;"></i>
+            </div>
+            <h3 class="mb-3">Confort Garantizado</h3>
+            <p>Ergonomía y detalles pensados para que te sientas como en casa.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <div id="footer"></div>
+  <!-- Testimonials Section -->
+  <section class="testimonials py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="display-6 fw-bold mb-5">Lo que dicen nuestros clientes</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-6">
+          <div class="card shadow-sm p-4">
+            <p class="fs-5">"Los muebles de VOS Y SOLO VOS transformaron mi sala. ¡No podría estar más feliz con la calidad y el diseño!"</p>
+            <span class="fw-bold">— Ana López, Lima</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card shadow-sm p-4">
+            <p class="fs-5">"Excelente atención y productos que superaron mis expectativas. ¡Totalmente recomendado!"</p>
+            <span class="fw-bold">— Carlos Ramírez, Arequipa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta py-5 text-center" style="background-color: #f8f9fa;">
+    <div class="container">
+      <h2 class="display-6 fw-bold mb-3">¿Listo para renovar tu espacio?</h2>
+      <p class="fs-5 mb-4">Descubre nuestra colección y encuentra el mueble perfecto para ti.</p>
+      <a href="contacto.html" class="btn btn-dark btn-lg px-4 py-2">Contáctanos</a>
+    </div>
+  </section>
+
+  <!-- Footer dinámico -->
+  <footer id="footer"></footer>
+
+  <!-- Bootstrap 5 JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap Icons (opcional, para los iconos) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <!-- Script para cargar header y footer -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+  </script>
 </body>
 </html>

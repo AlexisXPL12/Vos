@@ -1,98 +1,42 @@
+/* Fuente personalizada */
 body {
-  margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #f8f8f8;
-  color: #333;
 }
 
-header, footer {
-  background-color: #3e2723;
-  color: white;
-  padding: 15px 0;
-}
-
-.container {
-  width: 90%;
-  margin: auto;
-}
-
-.logo {
-  height: 60px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-nav a:hover {
-  color: #ffc107;
-}
-
+/* Estilo del hero con imagen de fondo */
 .hero {
   background: url('../img/muebles1.jpg') center/cover no-repeat;
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
 }
 
-.hero .btn {
-  background: #ffc107;
-  color: #3e2723;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
+/* Color personalizado para el botón del hero */
+.hero .btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
 }
 
-.features, .productos, .nosotros, .contacto {
-  padding: 50px 0;
-  text-align: center;
+/* Color personalizado para el botón oscuro */
+.btn-dark {
+  background-color: #3e2723;
+  border-color: #3e2723;
 }
 
-.cards, .grid {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+/* Efecto hover para los enlaces del header */
+nav a:hover {
+  color: #ffc107 !important;
 }
 
-.card, .item {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 20px;
-  width: 300px;
-}
-
-.item img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.btn {
-  background: #3e2723;
-  color: white;
-  padding: 10px 20px;
+/* Color del texto en las tarjetas */
+.card {
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  transition: transform 0.3s;
 }
 
-.btn:hover {
-  background: #5d4037;
+/* Efecto hover en las tarjetas */
+.card:hover {
+  transform: translateY(-5px);
 }
 
-footer p {
-  margin: 5px 0;
-  text-align: center;
+/* Color del footer */
+footer.bg-dark {
+  background-color: #3e2723 !important;
 }
