@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesas de Comedor - VOS Y SOLO VOS</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #3e2723;
+      --secondary-color: #5d4037;
+      --accent-color: #d4a574;
+      --light-bg: #faf8f6;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #faf8f6 0%, #f5f1ed 100%);
+      color: #333;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb-section {
+      background: white;
+      padding: 20px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .breadcrumb {
+      background: transparent;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumb-item a:hover {
+      color: var(--accent-color);
+    }
+
+    .breadcrumb-item.active {
+      color: #666;
+    }
+
+    /* Hero de Categoría */
+    .category-hero {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .category-hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+    }
+
+    .category-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .category-description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.95;
+      max-width: 800px;
+    }
+
+    .category-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-item i {
+      font-size: 1.5rem;
+      color: var(--accent-color);
+    }
+
+    .stat-item span {
+      font-size: 0.95rem;
+    }
+
+    /* Filtros */
+    .filters-section {
+      background: white;
+      padding: 30px 0;
+      margin: 40px 0;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .filter-btn {
+      padding: 10px 24px;
+      border: 2px solid #e0e0e0;
+      background: white;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #666;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    /* Grid de Productos */
+    .products-grid {
+      padding: 40px 0;
+    }
+
+    .product-item {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
+      margin-bottom: 30px;
+      cursor: pointer;
+    }
+
+    .product-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-img-wrapper {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .product-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--accent-color);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .product-wishlist {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-wishlist:hover {
+      background: var(--accent-color);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .product-details {
+      padding: 24px;
+    }
+
+    .product-category {
+      font-size: 0.8rem;
+      color: var(--accent-color);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .product-description {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-features {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .feature i {
+      color: var(--accent-color);
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .product-price {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      color: #999;
+      margin-bottom: 2px;
+    }
+
+    .price-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .btn-view-product {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-view-product:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(62, 39, 35, 0.3);
+      color: white;
+    }
+
+    /* Paginación */
+    .pagination {
+      gap: 8px;
+    }
+
+    .page-link {
+      border: 2px solid #e0e0e0;
+      color: var(--primary-color);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .page-link:hover {
+      background: var(--accent-color);
+      color: white;
+      border-color: var(--accent-color);
+    }
+
+    .page-item.active .page-link {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    .page-item.disabled .page-link {
+      background: #f5f5f5;
+      border-color: #e0e0e0;
+    }
+
+    /* Benefits Section */
+    .benefit-item {
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .benefit-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .benefit-item h5 {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .category-hero h1 {
+        font-size: 2rem;
+      }
+
+      .category-description {
+        font-size: 1rem;
+      }
+
+      .category-stats {
+        gap: 20px;
+      }
+
+      .product-img-wrapper {
+        height: 200px;
+      }
+
+      .product-name {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header dinámico -->
+  <header id="header"></header>
+
+  <!-- Breadcrumb -->
+  <section class="breadcrumb-section">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i> Inicio</a></li>
+          <li class="breadcrumb-item"><a href="productos.html">Productos</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Mesas de Comedor</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Hero de Categoría -->
+  <section class="category-hero">
+    <div class="container">
+      <div class="category-hero-content">
+        <h1>Mesas de Comedor</h1>
+        <p class="category-description">
+          Convierte cada comida en una experiencia memorable con nuestra exclusiva colección de mesas de comedor. 
+          Diseñadas para ser el corazón de tu hogar, nuestras mesas combinan funcionalidad excepcional con diseño 
+          sofisticado. Fabricadas con maderas nobles y materiales premium, cada pieza es una inversión en momentos 
+          compartidos que durarán generaciones. Ya sea para cenas íntimas o grandes celebraciones familiares, 
+          encuentra la mesa perfecta que une estilo, durabilidad y elegancia atemporal.
+        </p>
+        <div class="category-stats">
+          <div class="stat-item">
+            <i class="bi bi-box-seam"></i>
+            <span>15 Modelos disponibles</span>
+          </div>
+          <div class="stat-item">
+            <i class="bi bi-truck"></i>
+            <span>Envío e instalación gratis</span>
+          </div>
+          <div class="stat-item">
+            <i class="bi bi-shield-check"></i>
+            <span>Garantía 5 años</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtros -->
+  <section class="filters-section container">
+    <div class="text-center mb-3">
+      <h5 class="mb-3"><i class="bi bi-funnel"></i> Filtrar por:</h5>
+      <button class="filter-btn active">Todos</button>
+      <button class="filter-btn">4 Puestos</button>
+      <button class="filter-btn">6 Puestos</button>
+      <button class="filter-btn">8 Puestos</button>
+      <button class="filter-btn">Extensibles</button>
+      <button class="filter-btn">Redondas</button>
+      <button class="filter-btn">Rectangulares</button>
+    </div>
+  </section>
+
+  <!-- Grid de Productos -->
+  <section class="products-grid">
+    <div class="container">
+      <div class="row">
+        
+        <!-- Producto 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Bestseller</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Imperial">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa Premium</div>
+              <h3 class="product-name">Mesa Imperial 6 Puestos</h3>
+              <p class="product-description">
+                Elegancia clásica en madera de roble macizo. Acabado natural con protección anti-manchas.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-rulers"></i> 180 x 90 cm</span>
+                <span class="feature"><i class="bi bi-tree"></i> Roble macizo</span>
+                <span class="feature"><i class="bi bi-people"></i> 6 puestos</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 3,299</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Nuevo</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/1909791/pexels-photo-1909791.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Nordic">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa Escandinava</div>
+              <h3 class="product-name">Mesa Nordic Extensible</h3>
+              <p class="product-description">
+                Diseño minimalista con sistema de extensión oculto. Perfecta para espacios versátiles.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-arrows-angle-expand"></i> Extensible</span>
+                <span class="feature"><i class="bi bi-palette"></i> 3 colores</span>
+                <span class="feature"><i class="bi bi-people"></i> 6-8 puestos</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 2,899</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Premium</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Luxury">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa de Lujo</div>
+              <h3 class="product-name">Mesa Luxury Mármol</h3>
+              <p class="product-description">
+                Tope de mármol italiano auténtico sobre base metálica cromada. Lujo absoluto.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-gem"></i> Mármol</span>
+                <span class="feature"><i class="bi bi-star-fill"></i> Luxury</span>
+                <span class="feature"><i class="bi bi-people"></i> 6 puestos</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 5,999</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Compacta</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Compact">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa Pequeña</div>
+              <h3 class="product-name">Mesa Compact 4 Puestos</h3>
+              <p class="product-description">
+                Ideal para espacios reducidos. Diseño inteligente que maximiza funcionalidad.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-rulers"></i> 120 x 75 cm</span>
+                <span class="feature"><i class="bi bi-house"></i> Compacta</span>
+                <span class="feature"><i class="bi bi-people"></i> 4 puestos</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 1,499</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 5 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Redonda</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/1395964/pexels-photo-1395964.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Round">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa Redonda</div>
+              <h3 class="product-name">Mesa Round Familiar</h3>
+              <p class="product-description">
+                Perfecta para conversaciones íntimas. Diseño circular que une a la familia.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-circle"></i> Ø 120 cm</span>
+                <span class="feature"><i class="bi bi-tree"></i> Madera</span>
+                <span class="feature"><i class="bi bi-people"></i> 4-6 puestos</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 2,199</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Industrial</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/2956951/pexels-photo-2956951.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Loft">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa Industrial</div>
+              <h3 class="product-name">Mesa Loft Industrial</h3>
+              <p class="product-description">
+                Estilo urbano con madera recuperada y estructura metálica. Carácter único.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-gear"></i> Industrial</span>
+                <span class="feature"><i class="bi bi-recycle"></i> Reciclada</span>
+                <span class="feature"><i class="bi bi-people"></i> 6 puestos</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 2,699</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 7 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Clásica</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Vintage">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa Clásica</div>
+              <h3 class="product-name">Mesa Vintage Colonial</h3>
+              <p class="product-description">
+                Inspirada en diseños coloniales. Tallados artesanales y acabado envejecido.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-brush"></i> Tallada</span>
+                <span class="feature"><i class="bi bi-award"></i> Artesanal</span>
+                <span class="feature"><i class="bi bi-people"></i> 8 puestos</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 4,299</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 8 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Moderna</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/3968056/pexels-photo-3968056.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Glass">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa Contemporánea</div>
+              <h3 class="product-name">Mesa Glass Cristal</h3>
+              <p class="product-description">
+                Tope de cristal templado transparente. Aporta amplitud visual a tu comedor.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-square"></i> Cristal</span>
+                <span class="feature"><i class="bi bi-shield-check"></i> Templado</span>
+                <span class="feature"><i class="bi bi-people"></i> 6 puestos</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 2,499</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 9 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="product-item">
+            <div class="product-img-wrapper">
+              <span class="product-badge">Familiar</span>
+              <div class="product-wishlist">
+                <i class="bi bi-heart"></i>
+              </div>
+              <img src="https://images.pexels.com/photos/1907784/pexels-photo-1907784.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mesa Grand">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Mesa Grande</div>
+              <h3 class="product-name">Mesa Grand 8 Puestos</h3>
+              <p class="product-description">
+                Perfecta para grandes reuniones. Extensible hasta 10 personas para celebraciones.
+              </p>
+              <div class="product-features">
+                <span class="feature"><i class="bi bi-arrows-angle-expand"></i> 200-250 cm</span>
+                <span class="feature"><i class="bi bi-people-fill"></i> 8-10 puestos</span>
+                <span class="feature"><i class="bi bi-tree"></i> Nogal</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-value">S/ 3,799</span>
+                </div>
+                <a href="#" class="btn-view-product">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Paginación -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <nav aria-label="Paginación de productos">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">
+                  <i class="bi bi-chevron-left"></i>
+                </a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Beneficios -->
+  <section class="benefits-section py-5" style="background: white;">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-3 col-6 text-center">
+          <div class="benefit-item">
+            <i class="bi bi-truck" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+            <h5 class="mt-3">Envío e Instalación</h5>
+            <p class="text-muted small">Gratis en toda la ciudad</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 text-center">
+          <div class="benefit-item">
+            <i class="bi bi-shield-check" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+            <h5 class="mt-3">Garantía 5 Años</h5>
+            <p class="text-muted small">En todas nuestras mesas</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 text-center">
+          <div class="benefit-item">
+            <i class="bi bi-credit-card" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+            <h5 class="mt-3">Financiamiento</h5>
+            <p class="text-muted small">Hasta 12 meses sin intereses</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 text-center">
+          <div class="benefit-item">
+            <i class="bi bi-stars" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+            <h5 class="mt-3">Personalización</h5>
+            <p class="text-muted small">Elige tu acabado preferido</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer dinámico -->
+  <footer id="footer"></footer>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+
+      // Funcionalidad de filtros
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Funcionalidad de wishlist
+      const wishlistBtns = document.querySelectorAll('.product-wishlist');
+      wishlistBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const icon = this.querySelector('i');
+          if(icon.classList.contains('bi-heart')) {
+            icon.classList.remove('bi-heart');
+            icon.classList.add('bi-heart-fill');
+            this.style.color = '#d4a574';
+          } else {
+            icon.classList.remove('bi-heart-fill');
+            icon.classList.add('bi-heart');
+            this.style.color = '';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

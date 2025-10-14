@@ -10,94 +10,714 @@
   <!-- Google Fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Tu CSS personalizado -->
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <style>
-    /* Estilo para el hero con imagen de fondo */
+    /* Fuente y colores base */
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
     .hero {
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1200');
       background-size: cover;
       background-position: center;
-      height: 80vh;
+      background-attachment: fixed;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding-top: 70px;
+      position: relative;
     }
 
-    /* Estilo para las tarjetas de características */
-    .features .card {
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(to top, #fff, transparent);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      animation: fadeInUp 1s ease-out;
+      z-index: 1;
+    }
+
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(40px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #3e2723 0%, #5d4037 100%);
+      color: white;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #ffc107;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 0;
+      background-color: #f9f9f9;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
       transition: transform 0.3s, box-shadow 0.3s;
       border: none;
-      border-radius: 10px;
+      border-radius: 15px;
+      padding: 40px 30px;
+      height: 100%;
+      background-color: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     }
 
-    .features .card:hover {
+    .feature-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
 
-    /* Estilo para los botones */
+    .feature-icon {
+      color: #ffc107;
+      font-size: 3rem;
+      margin-bottom: 25px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+
+    /* Productos destacados */
+    .productos-destacados {
+      padding: 100px 0;
+      background-color: white;
+    }
+
+    .product-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card img {
+      height: 280px;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .product-card .card-body {
+      padding: 25px;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ffc107;
+      color: #1a1a1a;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      z-index: 1;
+    }
+
+    /* Categorías Section */
+    .categorias-section {
+      padding: 100px 0;
+      background: #f9f9f9;
+    }
+
+    .categoria-card {
+      position: relative;
+      height: 300px;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .categoria-card:hover {
+      transform: scale(1.05);
+    }
+
+    .categoria-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .categoria-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 30px;
+      color: white;
+    }
+
+    .categoria-overlay h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    /* Proceso Section */
+    .proceso-section {
+      padding: 100px 0;
+      background: white;
+    }
+
+    .proceso-item {
+      text-align: center;
+      padding: 30px 20px;
+      position: relative;
+    }
+
+    .proceso-number {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffc107, #ff9800);
+      color: white;
+      font-size: 2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+    }
+
+    .proceso-item h4 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+
+    /* Video Section */
+    .video-section {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #1a1a1a 0%, #3e2723 100%);
+      color: white;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Testimonios */
+    .testimonials {
+      padding: 100px 0;
+      background-color: #f9f9f9;
+    }
+
+    .testimonial-card {
+      border: none;
+      border-radius: 15px;
+      padding: 40px;
+      background-color: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      position: relative;
+      height: 100%;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      font-size: 5rem;
+      color: #ffc107;
+      position: absolute;
+      top: -10px;
+      left: 30px;
+      font-family: serif;
+      opacity: 0.3;
+    }
+
+    .testimonial-rating {
+      color: #ffc107;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #ffc107;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+      color: #1a1a1a;
+    }
+
+    .newsletter-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+    }
+
+    .newsletter-form button {
+      padding: 15px 35px;
+      background: #3e2723;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .newsletter-form button:hover {
+      background: #1a1a1a;
+      transform: translateY(-2px);
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 100px 0;
+      background: linear-gradient(rgba(62, 39, 35, 0.85), rgba(62, 39, 35, 0.85)), url('https://images.pexels.com/photos/271795/pexels-photo-271795.jpeg?auto=compress&cs=tinysrgb&w=1200');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+    }
+
+    /* Botones */
+    .btn-custom {
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      font-size: 1.1rem;
+    }
+
     .btn-warning {
       background-color: #ffc107;
-      border-color: #ffc107;
       color: #3e2723;
-      font-weight: 600;
     }
 
     .btn-dark {
       background-color: #3e2723;
-      border-color: #3e2723;
     }
 
-    /* Estilo para los testimonios */
-    .testimonials .card {
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .btn-outline-light {
+      border: 2px solid white;
+      color: white;
+      background: transparent;
+    }
+
+    .btn-custom:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
-<body class="bg-light">
+<body>
   <!-- Header dinámico -->
-  <header id="header"></header>
+  <div id="header"></div>
 
   <!-- Hero Section -->
-  <section class="hero d-flex align-items-center justify-content-center text-center text-white">
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="fw-bold">Transforma tu hogar con estilo</h1>
+      <p>En <strong>VOS Y SOLO VOS</strong>, creamos muebles que combinan diseño moderno, calidad excepcional y el confort que mereces. Cada pieza está pensada para hacer de tu espacio un lugar único.</p>
+      <a href="productos.html" class="btn btn-warning btn-custom btn-lg me-3">Explorar Catálogo</a>
+      <a href="contacto.html" class="btn btn-outline-light btn-custom btn-lg">Contáctanos</a>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
     <div class="container">
-      <h1 class="display-4 fw-bold mb-3">Transforma tu hogar con estilo</h1>
-      <p class="fs-5 mb-4">En <strong>VOS Y SOLO VOS</strong>, creamos muebles que combinan diseño moderno, calidad excepcional y el confort que mereces. Cada pieza está pensada para hacer de tu espacio un lugar único.</p>
-      <a href="productos.html" class="btn btn-warning btn-lg px-4 py-2 fw-bold">Explorar Catálogo</a>
+      <div class="row">
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Clientes Satisfechos</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number">1000+</span>
+            <span class="stat-label">Muebles Vendidos</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Años de Experiencia</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number">98%</span>
+            <span class="stat-label">Satisfacción</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section class="features py-5">
-    <div class="container text-center">
-      <h2 class="display-6 fw-bold mb-5">¿Por qué elegirnos?</h2>
-      <div class="row g-4 justify-content-center">
+  <section class="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>¿Por qué elegirnos?</h2>
+        <p>Nos dedicamos a crear experiencias únicas a través de muebles de calidad superior</p>
+      </div>
+      <div class="row g-4">
         <div class="col-md-4">
-          <div class="card h-100 shadow-sm p-4">
-            <div class="mb-3">
-              <i class="bi bi-palette fs-1" style="color: #ffc107;"></i>
+          <div class="feature-card">
+            <div class="text-center">
+              <i class="bi bi-palette feature-icon"></i>
             </div>
-            <h3 class="mb-3">Diseño Único</h3>
-            <p>Muebles con líneas modernas y elegantes, diseñados para destacar en cualquier ambiente.</p>
+            <h3 class="text-center">Diseño Único</h3>
+            <p class="text-center">Muebles con líneas modernas y elegantes, diseñados para destacar en cualquier ambiente y reflejar tu personalidad.</p>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card h-100 shadow-sm p-4">
-            <div class="mb-3">
-              <i class="bi bi-star-fill fs-1" style="color: #ffc107;"></i>
+          <div class="feature-card">
+            <div class="text-center">
+              <i class="bi bi-star-fill feature-icon"></i>
             </div>
-            <h3 class="mb-3">Calidad Premium</h3>
-            <p>Seleccionamos los mejores materiales para garantizar durabilidad y satisfacción.</p>
+            <h3 class="text-center">Calidad Premium</h3>
+            <p class="text-center">Seleccionamos los mejores materiales para garantizar durabilidad, resistencia y satisfacción a largo plazo.</p>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card h-100 shadow-sm p-4">
-            <div class="mb-3">
-              <i class="bi bi-heart-fill fs-1" style="color: #ffc107;"></i>
+          <div class="feature-card">
+            <div class="text-center">
+              <i class="bi bi-heart-fill feature-icon"></i>
             </div>
-            <h3 class="mb-3">Confort Garantizado</h3>
-            <p>Ergonomía y detalles pensados para que te sientas como en casa.</p>
+            <h3 class="text-center">Confort Garantizado</h3>
+            <p class="text-center">Ergonomía y detalles pensados para que te sientas como en casa, con el máximo confort en cada momento.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="text-center">
+              <i class="bi bi-truck feature-icon"></i>
+            </div>
+            <h3 class="text-center">Envío Seguro</h3>
+            <p class="text-center">Entregamos tus muebles con cuidado extremo, garantizando que lleguen en perfectas condiciones a tu hogar.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="text-center">
+              <i class="bi bi-tools feature-icon"></i>
+            </div>
+            <h3 class="text-center">Instalación Profesional</h3>
+            <p class="text-center">Nuestro equipo experto se encarga del montaje y la instalación para que disfrutes sin preocupaciones.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="text-center">
+              <i class="bi bi-shield-check feature-icon"></i>
+            </div>
+            <h3 class="text-center">Garantía Extendida</h3>
+            <p class="text-center">Respaldamos la calidad de nuestros productos con garantía extendida y servicio post-venta excepcional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías Section -->
+  <section class="categorias-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Explora por Categorías</h2>
+        <p>Encuentra el mueble perfecto para cada espacio de tu hogar</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <a href="productos.html" class="text-decoration-none">
+            <div class="categoria-card">
+              <img src="https://www.arqhys.com/wp-content/uploads/2023/03/Diseno-de-salas-de-estar-5.jpg" alt="Sala">
+              <div class="categoria-overlay">
+                <h3>Sala de Estar</h3>
+                <p>Sofás, sillones y mesas de centro</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="productos.html" class="text-decoration-none">
+            <div class="categoria-card">
+              <img src="https://img.freepik.com/foto-gratis/juego-comedor-moderno-renderizado-3d-moderno-comedor-lujo_105762-2202.jpg?semt=ais_hybrid&w=740&q=80" alt="Comedor">
+              <div class="categoria-overlay">
+                <h3>Comedor</h3>
+                <p>Mesas, sillas y aparadores</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="productos.html" class="text-decoration-none">
+            <div class="categoria-card">
+              <img src="https://content.elmueble.com/medio/2025/04/01/dormitorio-con-cabecero-de-obra-00560141_2bbe7015_00560141_250401120859_2000x1333.webp" alt="Dormitorio">
+              <div class="categoria-overlay">
+                <h3>Dormitorio</h3>
+                <p>Camas, closets y mesas de noche</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos Destacados -->
+  <section class="productos-destacados">
+    <div class="container">
+      <div class="section-title">
+        <h2>Productos Destacados</h2>
+        <p>Descubre nuestras piezas más populares y exclusivas</p>
+      </div>
+      <div class="row g-4">
+        <!-- Sofá moderno -->
+        <div class="col-md-4">
+          <div class="card product-card">
+            <div class="position-relative">
+              <span class="product-badge">Nuevo</span>
+              <img src="https://imcesa.com.pe/wp-content/uploads/2025/01/8.jpg" class="card-img-top" alt="Sofá moderno">
+            </div>
+            <div class="card-body text-center">
+              <h3 class="card-title">Sofá Moderno Luxe</h3>
+              <p class="card-text">Confort y elegancia en tu sala. Diseño contemporáneo con materiales de primera calidad.</p>
+              <p class="fw-bold fs-5 text-warning mb-3">S/ 2,999</p>
+              <a href="productos.html" class="btn btn-dark btn-custom">Ver Detalles</a>
+            </div>
+          </div>
+        </div>
+        <!-- Mesa de comedor -->
+        <div class="col-md-4">
+          <div class="card product-card">
+            <div class="position-relative">
+              <span class="product-badge">Bestseller</span>
+              <img src="https://ferrum.com.co/cdn/shop/files/MG_2019.jpg?v=1729272055&width=1946" class="card-img-top" alt="Mesa de comedor">
+            </div>
+            <div class="card-body text-center">
+              <h3 class="card-title">Mesa de Comedor Oslo</h3>
+              <p class="card-text">Diseño escandinavo que une a la familia. Madera maciza y acabados impecables.</p>
+              <p class="fw-bold fs-5 text-warning mb-3">S/ 1,899</p>
+              <a href="productos.html" class="btn btn-dark btn-custom">Ver Detalles</a>
+            </div>
+          </div>
+        </div>
+        <!-- Cama premium -->
+        <div class="col-md-4">
+          <div class="card product-card">
+            <div class="position-relative">
+              <span class="product-badge">Premium</span>
+              <img src="https://paraisoperu.vtexassets.com/arquivos/ids/209356/cama-royal-cloud-gris-king-1.jpg?v=638374920610000000" class="card-img-top" alt="Cama Premium">
+            </div>
+            <div class="card-body text-center">
+              <h3 class="card-title">Cama Premium Cloud</h3>
+              <p class="card-text">Duerme con el máximo confort. Sistema de soporte ergonómico y diseño elegante.</p>
+              <p class="fw-bold fs-5 text-warning mb-3">S/ 3,499</p>
+              <a href="productos.html" class="btn btn-dark btn-custom">Ver Detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso Section -->
+  <section class="proceso-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nuestro Proceso</h2>
+        <p>Hacemos que comprar muebles sea fácil y sin complicaciones</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="proceso-item">
+            <div class="proceso-number">1</div>
+            <h4>Explora</h4>
+            <p>Navega por nuestro catálogo y descubre diseños únicos que se adaptan a tu estilo.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="proceso-item">
+            <div class="proceso-number">2</div>
+            <h4>Personaliza</h4>
+            <p>Elige colores, materiales y medidas según tus necesidades específicas.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="proceso-item">
+            <div class="proceso-number">3</div>
+            <h4>Ordena</h4>
+            <p>Realiza tu pedido de forma segura y recibe confirmación inmediata.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="proceso-item">
+            <div class="proceso-number">4</div>
+            <h4>Disfruta</h4>
+            <p>Recibe e instala tu mueble con nuestra ayuda profesional. ¡Listo para usar!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <div class="container">
+      <div class="section-title mb-5">
+        <h2 class="text-white">Conoce Nuestro Taller</h2>
+        <p class="text-light">Descubre cómo creamos cada pieza con dedicación y maestría</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video VOS Y SOLO VOS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -105,32 +725,93 @@
   </section>
 
   <!-- Testimonials Section -->
-  <section class="testimonials py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="display-6 fw-bold mb-5">Lo que dicen nuestros clientes</h2>
-      <div class="row g-4 justify-content-center">
-        <div class="col-md-6">
-          <div class="card shadow-sm p-4">
-            <p class="fs-5">"Los muebles de VOS Y SOLO VOS transformaron mi sala. ¡No podría estar más feliz con la calidad y el diseño!"</p>
-            <span class="fw-bold">— Ana López, Lima</span>
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2>Lo que dicen nuestros clientes</h2>
+        <p>Miles de hogares transformados y clientes satisfechos</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <p class="fs-6">Los muebles de VOS Y SOLO VOS transformaron mi sala completamente. La calidad es excepcional y el diseño es exactamente lo que buscaba. ¡No podría estar más feliz!</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">AL</div>
+              <div>
+                <span class="fw-bold d-block">Ana López</span>
+                <small class="text-muted">Lima</small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="card shadow-sm p-4">
-            <p class="fs-5">"Excelente atención y productos que superaron mis expectativas. ¡Totalmente recomendado!"</p>
-            <span class="fw-bold">— Carlos Ramírez, Arequipa</span>
+        <div class="col-md-4">
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <p class="fs-6">Excelente atención desde el primer contacto. Los productos superaron mis expectativas y el servicio de instalación fue impecable. Totalmente recomendado.</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">CR</div>
+              <div>
+                <span class="fw-bold d-block">Carlos Ramírez</span>
+                <small class="text-muted">Arequipa</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <p class="fs-6">La mejor inversión que hice para mi hogar. Muebles hermosos, duraderos y cómodos. El equipo de VOS Y SOLO VOS es súper profesional y atento.</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">MG</div>
+              <div>
+                <span class="fw-bold d-block">María García</span>
+                <small class="text-muted">Cusco</small>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container text-center">
+      <h2 class="display-5 fw-bold mb-3">Suscríbete a Nuestro Newsletter</h2>
+      <p class="fs-5 mb-4">Recibe ofertas exclusivas, consejos de decoración y novedades directamente en tu email</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">Suscribirse</button>
+      </form>
+    </div>
+  </section>
+
   <!-- CTA Section -->
-  <section class="cta py-5 text-center" style="background-color: #f8f9fa;">
+  <section class="cta">
     <div class="container">
-      <h2 class="display-6 fw-bold mb-3">¿Listo para renovar tu espacio?</h2>
-      <p class="fs-5 mb-4">Descubre nuestra colección y encuentra el mueble perfecto para ti.</p>
-      <a href="contacto.html" class="btn btn-dark btn-lg px-4 py-2">Contáctanos</a>
+      <h2 class="display-4 fw-bold mb-3">¿Listo para renovar tu espacio?</h2>
+      <p class="fs-4 mb-5">Descubre nuestra colección completa y encuentra el mueble perfecto que transformará tu hogar</p>
+      <a href="productos.html" class="btn btn-warning btn-custom btn-lg me-3">Ver Catálogo</a>
+      <a href="contacto.html" class="btn btn-outline-light btn-custom btn-lg">Contáctanos Ahora</a>
     </div>
   </section>
 
@@ -139,8 +820,6 @@
 
   <!-- Bootstrap 5 JS Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Bootstrap Icons (opcional, para los iconos) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <!-- Script para cargar header y footer -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -155,6 +834,51 @@
         .then((data) => {
           document.getElementById("footer").innerHTML = data;
         });
+    });
+
+    // Animación de números en Stats Section
+    const observerOptions = {
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statNumbers = entry.target.querySelectorAll('.stat-number');
+          statNumbers.forEach(stat => {
+            const finalValue = stat.textContent;
+            const isPercent = finalValue.includes('%');
+            const isPlus = finalValue.includes('+');
+            const numericValue = parseInt(finalValue.replace(/\D/g, ''));
+            
+            let current = 0;
+            const increment = numericValue / 50;
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= numericValue) {
+                stat.textContent = finalValue;
+                clearInterval(timer);
+              } else {
+                stat.textContent = Math.floor(current) + (isPlus ? '+' : '') + (isPercent ? '%' : '');
+              }
+            }, 30);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+      observer.observe(statsSection);
+    }
+
+    // Newsletter form
+    document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = e.target.querySelector('input').value;
+      alert('¡Gracias por suscribirte! Pronto recibirás nuestras novedades.');
+      e.target.reset();
     });
   </script>
 </body>

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sofás - VOS Y SOLO VOS</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #3e2723;
+            --secondary-color: #5d4037;
+            --accent-color: #d4a574;
+            --light-bg: #faf8f6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #faf8f6 0%, #f5f1ed 100%);
+            color: #333;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb-section {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .breadcrumb {
+            background: transparent;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .breadcrumb-item.active {
+            color: #666;
+        }
+
+        /* Hero de Categoría */
+        .category-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .category-hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .category-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .category-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            max-width: 800px;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .stat-item span {
+            font-size: 0.95rem;
+        }
+
+        /* Filtros */
+        .filters-section {
+            background: white;
+            padding: 30px 0;
+            margin: 40px 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Grid de Productos */
+        .products-grid {
+            padding: 40px 0;
+        }
+
+        .product-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        .product-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-wishlist {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-wishlist:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .product-details {
+            padding: 24px;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-features {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .feature i {
+            color: var(--accent-color);
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .product-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 2px;
+        }
+
+        .price-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .btn-view-product {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-view-product:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(62, 39, 35, 0.3);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .category-hero h1 {
+                font-size: 2rem;
+            }
+
+            .category-description {
+                font-size: 1rem;
+            }
+
+            .category-stats {
+                gap: 20px;
+            }
+
+            .product-img-wrapper {
+                height: 200px;
+            }
+
+            .product-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header dinámico -->
+    <header id="header"></header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i> Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="productos.html">Productos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Sofás</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Hero de Categoría -->
+    <section class="category-hero">
+        <div class="container">
+            <div class="category-hero-content">
+                <h1>Sofás Modernos</h1>
+                <p class="category-description">
+                    Descubre nuestra exclusiva colección de sofás diseñados para combinar confort excepcional con estilo
+                    contemporáneo.
+                    Cada pieza ha sido cuidadosamente seleccionada para transformar tu sala de estar en un espacio
+                    acogedor y elegante.
+                    Fabricados con materiales de primera calidad y acabados impecables, nuestros sofás no solo son un
+                    mueble,
+                    son una inversión en comodidad y diseño que perdurará por años.
+                </p>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <i class="bi bi-box-seam"></i>
+                        <span>18 Modelos disponibles</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="bi bi-truck"></i>
+                        <span>Envío gratis</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Garantía 5 años</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="filters-section container">
+        <div class="text-center mb-3">
+            <h5 class="mb-3"><i class="bi bi-funnel"></i> Filtrar por:</h5>
+            <button class="filter-btn active">Todos</button>
+            <button class="filter-btn">2 Plazas</button>
+            <button class="filter-btn">3 Plazas</button>
+            <button class="filter-btn">Seccionales</button>
+            <button class="filter-btn">Con Chaise Longue</button>
+            <button class="filter-btn">Reclinables</button>
+        </div>
+    </section>
+
+    <!-- Grid de Productos -->
+    <section class="products-grid">
+        <div class="container">
+            <div class="row">
+
+                <!-- Producto 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <span class="product-badge">Bestseller</span>
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Sofá Nordic">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Moderno</div>
+                            <h3 class="product-name">Sofá Nordic 3 Plazas</h3>
+                            <p class="product-description">
+                                Diseño escandinavo con líneas limpias y elegantes. Tapizado en tela texturizada de alta
+                                resistencia.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-rulers"></i> 220 x 95 cm</span>
+                                <span class="feature"><i class="bi bi-palette"></i> 5 colores</span>
+                                <span class="feature"><i class="bi bi-people"></i> 3 plazas</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 2,499</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <span class="product-badge">Nuevo</span>
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Sofá Milano">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Premium</div>
+                            <h3 class="product-name">Sofá Milano Seccional</h3>
+                            <p class="product-description">
+                                Sofá seccional en forma de L con chaise longue. Ideal para espacios amplios y reuniones
+                                familiares.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-rulers"></i> 280 x 180 cm</span>
+                                <span class="feature"><i class="bi bi-star-fill"></i> Premium</span>
+                                <span class="feature"><i class="bi bi-people"></i> 5 plazas</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 3,999</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://images.pexels.com/photos/1909791/pexels-photo-1909791.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Sofá Minimal">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Compacto</div>
+                            <h3 class="product-name">Sofá Minimal 2 Plazas</h3>
+                            <p class="product-description">
+                                Perfecto para apartamentos y espacios reducidos. Diseño minimalista con máximo confort.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-rulers"></i> 160 x 85 cm</span>
+                                <span class="feature"><i class="bi bi-palette"></i> 4 colores</span>
+                                <span class="feature"><i class="bi bi-people"></i> 2 plazas</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 1,799</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <span class="product-badge">Oferta</span>
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://www.akasamuebles.es/405867-large_default/sofa-chester-3-plazas-en-verde.jpg"
+                                alt="Sofá Chester">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Clásico</div>
+                            <h3 class="product-name">Sofá Chester 3 Plazas</h3>
+                            <p class="product-description">
+                                Estilo clásico inglés con botones capitoné. Tapizado en cuero sintético de alta calidad.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-rulers"></i> 210 x 90 cm</span>
+                                <span class="feature"><i class="bi bi-gem"></i> Clásico</span>
+                                <span class="feature"><i class="bi bi-people"></i> 3 plazas</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 2,899</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <span class="product-badge">Destacado</span>
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://media.falabella.com/falabellaPE/881477778_005/w=1500,h=1500,fit=pad"
+                                alt="Sofá Relax">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Reclinable</div>
+                            <h3 class="product-name">Sofá Relax Reclinable</h3>
+                            <p class="product-description">
+                                Con mecanismo de reclinación manual. Reposapiés extensible para máximo confort.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-rulers"></i> 200 x 95 cm</span>
+                                <span class="feature"><i class="bi bi-arrow-repeat"></i> Reclinable</span>
+                                <span class="feature"><i class="bi bi-people"></i> 3 plazas</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 3,299</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 6 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://images.pexels.com/photos/1148955/pexels-photo-1148955.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Sofá Modular">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Modular</div>
+                            <h3 class="product-name">Sofá Modular Flex</h3>
+                            <p class="product-description">
+                                Sistema modular que se adapta a tus necesidades. Configura el sofá según tu espacio.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-grid-3x3"></i> Modular</span>
+                                <span class="feature"><i class="bi bi-palette"></i> 6 colores</span>
+                                <span class="feature"><i class="bi bi-puzzle"></i> Configurable</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 2,699</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 7 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <span class="product-badge">Premium</span>
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Sofá Velvet">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Luxury</div>
+                            <h3 class="product-name">Sofá Velvet Luxury</h3>
+                            <p class="product-description">
+                                Tapizado en terciopelo premium con estructura de madera maciza. Elegancia máxima.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-rulers"></i> 230 x 92 cm</span>
+                                <span class="feature"><i class="bi bi-star-fill"></i> Luxury</span>
+                                <span class="feature"><i class="bi bi-people"></i> 3 plazas</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 4,599</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 8 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://http2.mlstatic.com/D_Q_NP_661184-MLA81788511429_012025-O.webp"
+                                alt="Sofá Cama">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Multifuncional</div>
+                            <h3 class="product-name">Sofá Cama Convertible</h3>
+                            <p class="product-description">
+                                Sofá que se convierte en cama en segundos. Ideal para visitas inesperadas.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-rulers"></i> 190 x 85 cm</span>
+                                <span class="feature"><i class="bi bi-moon"></i> Cama</span>
+                                <span class="feature"><i class="bi bi-people"></i> 2 plazas</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 2,199</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 9 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-item">
+                        <div class="product-img-wrapper">
+                            <span class="product-badge">Eco-Friendly</span>
+                            <div class="product-wishlist">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <img src="https://images.pexels.com/photos/276534/pexels-photo-276534.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Sofá Eco">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-category">Sofá Sostenible</div>
+                            <h3 class="product-name">Sofá Eco Natural</h3>
+                            <p class="product-description">
+                                Fabricado con materiales reciclados y madera certificada. Compromiso con el planeta.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature"><i class="bi bi-tree"></i> Sostenible</span>
+                                <span class="feature"><i class="bi bi-recycle"></i> Reciclado</span>
+                                <span class="feature"><i class="bi bi-people"></i> 3 plazas</span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-value">S/ 2,799</span>
+                                </div>
+                                <a href="#" class="btn-view-product">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Sección de Beneficios -->
+    <section class="benefits-section py-5" style="background: white;">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-6 text-center">
+                    <div class="benefit-item">
+                        <i class="bi bi-truck" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+                        <h5 class="mt-3">Envío e Instalación</h5>
+                        <p class="text-muted small">Gratis en toda la ciudad</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="benefit-item">
+                        <i class="bi bi-shield-check" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+                        <h5 class="mt-3">Garantía 5 Años</h5>
+                        <p class="text-muted small">En todas nuestras mesas</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="benefit-item">
+                        <i class="bi bi-credit-card" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+                        <h5 class="mt-3">Financiamiento</h5>
+                        <p class="text-muted small">Hasta 12 meses sin intereses</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="benefit-item">
+                        <i class="bi bi-stars" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+                        <h5 class="mt-3">Personalización</h5>
+                        <p class="text-muted small">Elige tu acabado preferido</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer dinámico -->
+    <footer id="footer"></footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("header.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            fetch("footer.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+
+            // Funcionalidad de filtros
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Funcionalidad de wishlist
+            const wishlistBtns = document.querySelectorAll('.product-wishlist');
+            wishlistBtns.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('bi-heart')) {
+                        icon.classList.remove('bi-heart');
+                        icon.classList.add('bi-heart-fill');
+                        this.style.color = '#d4a574';
+                    } else {
+                        icon.classList.remove('bi-heart-fill');
+                        icon.classList.add('bi-heart');
+                        this.style.color = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuesta de Satisfacción – VOS Y SOLO VOS</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <!-- Tu CSS personalizado -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root {
+      --primary-color: #3e2723;
+      --secondary-color: #ffc107;
+      --accent-color: #d4a574;
+      --text-dark: #2c2c2c;
+      --text-light: #6c757d;
+      --success-color: #4caf50;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 40px 0;
+    }
+
+    /* Hero Section */
+    .hero-survey {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+
+    .hero-survey h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero-survey p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Survey Card */
+    .survey-card {
+      background: white;
+      border-radius: 30px;
+      padding: 50px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .question-section {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .question-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .question-number {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-right: 15px;
+    }
+
+    .question-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Star Rating */
+    .star-rating {
+      display: flex;
+      gap: 10px;
+      font-size: 2.5rem;
+      cursor: pointer;
+      justify-content: center;
+    }
+
+    .star {
+      color: #ddd;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .star:hover,
+    .star.active {
+      color: var(--secondary-color);
+      transform: scale(1.2);
+    }
+
+    .star:hover ~ .star {
+      color: #ddd;
+      transform: scale(1);
+    }
+
+    /* Emoji Rating */
+    .emoji-rating {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .emoji-option {
+      width: 80px;
+      height: 80px;
+      border: 3px solid #e0e0e0;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .emoji-option:hover {
+      border-color: var(--secondary-color);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 193, 7, 0.2);
+    }
+
+    .emoji-option.selected {
+      border-color: var(--secondary-color);
+      background: linear-gradient(135deg, #fff3cd, #ffe69c);
+    }
+
+    .emoji-option span {
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+    }
+
+    .emoji-option small {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    /* Radio Buttons Custom */
+    .custom-radio {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .radio-option {
+      padding: 18px 25px;
+      border: 2px solid #e0e0e0;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      background: white;
+    }
+
+    .radio-option:hover {
+      border-color: var(--secondary-color);
+      background: #fffbf0;
+    }
+
+    .radio-option input[type="radio"] {
+      width: 22px;
+      height: 22px;
+      margin-right: 15px;
+      cursor: pointer;
+      accent-color: var(--secondary-color);
+    }
+
+    .radio-option.selected {
+      border-color: var(--secondary-color);
+      background: linear-gradient(135deg, #fff3cd, #ffe69c);
+    }
+
+    /* Checkboxes Custom */
+    .custom-checkbox {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .checkbox-option {
+      padding: 15px 25px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      background: white;
+    }
+
+    .checkbox-option:hover {
+      border-color: var(--secondary-color);
+      background: #fffbf0;
+    }
+
+    .checkbox-option input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      cursor: pointer;
+      accent-color: var(--secondary-color);
+    }
+
+    .checkbox-option.selected {
+      border-color: var(--secondary-color);
+      background: linear-gradient(135deg, #fff3cd, #ffe69c);
+    }
+
+    /* Textarea */
+    .form-control {
+      border-radius: 15px;
+      padding: 18px 25px;
+      border: 2px solid #e0e0e0;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.15);
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      border: none;
+      padding: 18px 50px;
+      font-weight: 600;
+      border-radius: 15px;
+      color: white;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      width: 100%;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(255, 193, 7, 0.3);
+      background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+    }
+
+    /* Success Modal */
+    .success-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-modal.show {
+      display: flex;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .success-content {
+      background: white;
+      border-radius: 30px;
+      padding: 60px 50px;
+      text-align: center;
+      max-width: 500px;
+      animation: scaleIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .success-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--success-color), #45a049);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      animation: bounce 0.6s ease-out 0.3s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .success-icon i {
+      font-size: 3rem;
+      color: white;
+    }
+
+    .success-content h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .success-content p {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-close-modal {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-close-modal:hover {
+      background: #2d1b18;
+      transform: translateY(-2px);
+    }
+
+    /* Redirection Message */
+    .redirect-message {
+      margin-top: 15px;
+      margin-bottom: 20px;
+      padding: 12px 20px;
+      background: #fff3cd;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .redirect-message i {
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      background: #e0e0e0;
+      height: 8px;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .progress-bar-custom {
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      transition: width 0.3s ease;
+      border-radius: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .survey-card {
+        padding: 30px 20px;
+        border-radius: 20px;
+      }
+
+      .hero-survey h1 {
+        font-size: 2rem;
+      }
+
+      .star-rating {
+        font-size: 2rem;
+      }
+
+      .emoji-option {
+        width: 70px;
+        height: 70px;
+      }
+
+      .emoji-option span {
+        font-size: 2rem;
+      }
+
+      .success-content {
+        padding: 40px 30px;
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header dinámico -->
+  <header id="header"></header>
+
+  <!-- Hero Section -->
+  <section class="hero-survey">
+    <div class="container">
+      <h1><i class="bi bi-star-fill me-3" style="color: var(--secondary-color);"></i>Encuesta de Satisfacción</h1>
+      <p>Tu opinión nos ayuda a mejorar. ¡Gracias por tu tiempo!</p>
+    </div>
+  </section>
+
+  <!-- Survey Form -->
+  <section class="py-5">
+    <div class="container">
+      <div class="survey-card">
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-bar-custom" id="progressBar" style="width: 0%"></div>
+        </div>
+
+        <form id="surveyForm">
+          <!-- Pregunta 1: Rating General -->
+          <div class="question-section" data-question="1">
+            <div class="question-title">
+              <span class="question-number">1</span>
+              <span>¿Cómo calificarías tu experiencia general con VOS Y SOLO VOS?</span>
+            </div>
+            <div class="star-rating" id="generalRating">
+              <i class="bi bi-star-fill star" data-value="1"></i>
+              <i class="bi bi-star-fill star" data-value="2"></i>
+              <i class="bi bi-star-fill star" data-value="3"></i>
+              <i class="bi bi-star-fill star" data-value="4"></i>
+              <i class="bi bi-star-fill star" data-value="5"></i>
+            </div>
+            <input type="hidden" name="general_rating" id="generalRatingValue" required>
+          </div>
+
+          <!-- Pregunta 2: Calidad de Productos -->
+          <div class="question-section" data-question="2">
+            <div class="question-title">
+              <span class="question-number">2</span>
+              <span>¿Qué tan satisfecho estás con la calidad de nuestros productos?</span>
+            </div>
+            <div class="emoji-rating">
+              <div class="emoji-option" data-value="1">
+                <span>😞</span>
+                <small>Muy insatisfecho</small>
+              </div>
+              <div class="emoji-option" data-value="2">
+                <span>😕</span>
+                <small>Insatisfecho</small>
+              </div>
+              <div class="emoji-option" data-value="3">
+                <span>😐</span>
+                <small>Neutral</small>
+              </div>
+              <div class="emoji-option" data-value="4">
+                <span>😊</span>
+                <small>Satisfecho</small>
+              </div>
+              <div class="emoji-option" data-value="5">
+                <span>😍</span>
+                <small>Muy satisfecho</small>
+              </div>
+            </div>
+            <input type="hidden" name="product_quality" id="productQuality" required>
+          </div>
+
+          <!-- Pregunta 3: Atención al Cliente -->
+          <div class="question-section" data-question="3">
+            <div class="question-title">
+              <span class="question-number">3</span>
+              <span>¿Cómo evaluarías nuestro servicio de atención al cliente?</span>
+            </div>
+            <div class="star-rating" id="customerService">
+              <i class="bi bi-star-fill star" data-value="1"></i>
+              <i class="bi bi-star-fill star" data-value="2"></i>
+              <i class="bi bi-star-fill star" data-value="3"></i>
+              <i class="bi bi-star-fill star" data-value="4"></i>
+              <i class="bi bi-star-fill star" data-value="5"></i>
+            </div>
+            <input type="hidden" name="customer_service" id="customerServiceValue" required>
+          </div>
+
+          <!-- Pregunta 4: Recomendación -->
+          <div class="question-section" data-question="4">
+            <div class="question-title">
+              <span class="question-number">4</span>
+              <span>¿Qué tan probable es que recomiendes VOS Y SOLO VOS a un amigo o familiar?</span>
+            </div>
+            <div class="custom-radio">
+              <label class="radio-option">
+                <input type="radio" name="recommendation" value="1" required>
+                <span>Nada probable</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="recommendation" value="2" required>
+                <span>Poco probable</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="recommendation" value="3" required>
+                <span>Neutral</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="recommendation" value="4" required>
+                <span>Probable</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="recommendation" value="5" required>
+                <span>Muy probable</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pregunta 5: Aspectos Valorados -->
+          <div class="question-section" data-question="5">
+            <div class="question-title">
+              <span class="question-number">5</span>
+              <span>¿Qué aspectos valoras más de nuestros productos? (Selecciona todos los que apliquen)</span>
+            </div>
+            <div class="custom-checkbox">
+              <label class="checkbox-option">
+                <input type="checkbox" name="valued_aspects[]" value="diseño">
+                <span>Diseño innovador</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="valued_aspects[]" value="calidad">
+                <span>Calidad de materiales</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="valued_aspects[]" value="precio">
+                <span>Relación calidad-precio</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="valued_aspects[]" value="durabilidad">
+                <span>Durabilidad</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="valued_aspects[]" value="funcionalidad">
+                <span>Funcionalidad</span>
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="valued_aspects[]" value="personalización">
+                <span>Opciones de personalización</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pregunta 6: Tiempo de Entrega -->
+          <div class="question-section" data-question="6">
+            <div class="question-title">
+              <span class="question-number">6</span>
+              <span>¿Cómo fue tu experiencia con el tiempo de entrega?</span>
+            </div>
+            <div class="emoji-rating">
+              <div class="emoji-option" data-value="1">
+                <span>🐌</span>
+                <small>Muy lento</small>
+              </div>
+              <div class="emoji-option" data-value="2">
+                <span>😔</span>
+                <small>Lento</small>
+              </div>
+              <div class="emoji-option" data-value="3">
+                <span>👍</span>
+                <small>Aceptable</small>
+              </div>
+              <div class="emoji-option" data-value="4">
+                <span>⚡</span>
+                <small>Rápido</small>
+              </div>
+              <div class="emoji-option" data-value="5">
+                <span>🚀</span>
+                <small>Excelente</small>
+              </div>
+            </div>
+            <input type="hidden" name="delivery_time" id="deliveryTime" required>
+          </div>
+
+          <!-- Pregunta 7: Mejoras -->
+          <div class="question-section" data-question="7">
+            <div class="question-title">
+              <span class="question-number">7</span>
+              <span>¿Qué aspectos crees que podríamos mejorar?</span>
+            </div>
+            <textarea class="form-control" name="improvements" rows="5" placeholder="Comparte tus sugerencias aquí..." required></textarea>
+          </div>
+
+          <!-- Pregunta 8: Comentarios Adicionales -->
+          <div class="question-section" data-question="8">
+            <div class="question-title">
+              <span class="question-number">8</span>
+              <span>¿Tienes algún comentario adicional que quieras compartir?</span>
+            </div>
+            <textarea class="form-control" name="additional_comments" rows="4" placeholder="Opcional - Cuéntanos más sobre tu experiencia..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <i class="bi bi-send-fill me-2"></i>Enviar Encuesta
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="success-modal" id="successModal">
+    <div class="success-content">
+      <div class="success-icon">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+      <h2>¡Gracias por tu opinión!</h2>
+      <p>Tu feedback es muy valioso para nosotros y nos ayuda a seguir mejorando cada día.</p>
+      <div class="redirect-message">
+        <i class="bi bi-arrow-repeat"></i>
+        <span>Redirigiendo al inicio en <strong id="countdown">5</strong> segundos...</span>
+      </div>
+      <button class="btn-close-modal" onclick="redirectNow()">Ir al Inicio Ahora</button>
+    </div>
+  </div>
+
+  <!-- Footer dinámico -->
+  <footer id="footer"></footer>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Scripts -->
+  <script>
+    // Cargar header y footer
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    });
+
+    // Star Rating Handler
+    function setupStarRating(containerId, inputId) {
+      const container = document.getElementById(containerId);
+      const stars = container.querySelectorAll('.star');
+      const input = document.getElementById(inputId);
+
+      stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+          const value = star.dataset.value;
+          input.value = value;
+
+          stars.forEach((s, i) => {
+            if (i < value) {
+              s.classList.add('active');
+            } else {
+              s.classList.remove('active');
+            }
+          });
+          updateProgress();
+        });
+
+        star.addEventListener('mouseenter', () => {
+          const value = star.dataset.value;
+          stars.forEach((s, i) => {
+            if (i < value) {
+              s.style.color = 'var(--secondary-color)';
+            } else {
+              s.style.color = '#ddd';
+            }
+          });
+        });
+      });
+
+      container.addEventListener('mouseleave', () => {
+        const currentValue = input.value;
+        stars.forEach((s, i) => {
+          if (currentValue && i < currentValue) {
+            s.style.color = 'var(--secondary-color)';
+          } else {
+            s.style.color = '#ddd';
+          }
+        });
+      });
+    }
+
+    setupStarRating('generalRating', 'generalRatingValue');
+    setupStarRating('customerService', 'customerServiceValue');
+
+    // Emoji Rating Handler
+    function setupEmojiRating(questionNumber, inputId) {
+      const section = document.querySelector(`[data-question="${questionNumber}"]`);
+      const options = section.querySelectorAll('.emoji-option');
+      const input = document.getElementById(inputId);
+
+      options.forEach(option => {
+        option.addEventListener('click', () => {
+          options.forEach(opt => opt.classList.remove('selected'));
+          option.classList.add('selected');
+          input.value = option.dataset.value;
+          updateProgress();
+        });
+      });
+    }
+
+    setupEmojiRating(2, 'productQuality');
+    setupEmojiRating(6, 'deliveryTime');
+
+    // Radio Button Handler
+    document.querySelectorAll('.radio-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const radio = this.querySelector('input[type="radio"]');
+        const name = radio.name;
+
+        document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+          r.closest('.radio-option').classList.remove('selected');
+        });
+
+        this.classList.add('selected');
+        radio.checked = true;
+        updateProgress();
+      });
+    });
+
+    // Checkbox Handler
+    document.querySelectorAll('.checkbox-option').forEach(option => {
+      option.addEventListener('click', function(e) {
+        if (e.target.tagName !== 'INPUT') {
+          const checkbox = this.querySelector('input[type="checkbox"]');
+          checkbox.checked = !checkbox.checked;
+        }
+
+        if (this.querySelector('input[type="checkbox"]').checked) {
+          this.classList.add('selected');
+        } else {
+          this.classList.remove('selected');
+        }
+        updateProgress();
+      });
+    });
+
+    // Progress Bar Update
+    function updateProgress() {
+      const totalQuestions = 8;
+      let answeredQuestions = 0;
+
+      // Check star ratings
+      if (document.getElementById('generalRatingValue').value) answeredQuestions++;
+      if (document.getElementById('customerServiceValue').value) answeredQuestions++;
+
+      // Check emoji ratings
+      if (document.getElementById('productQuality').value) answeredQuestions++;
+      if (document.getElementById('deliveryTime').value) answeredQuestions++;
+
+      // Check radio buttons
+      if (document.querySelector('input[name="recommendation"]:checked')) answeredQuestions++;
+
+      // Check checkboxes
+      if (document.querySelectorAll('input[name="valued_aspects[]"]:checked').length > 0) answeredQuestions++;
+
+      // Check textareas
+      if (document.querySelector('textarea[name="improvements"]').value.trim()) answeredQuestions++;
+      if (document.querySelector('textarea[name="additional_comments"]').value.trim()) answeredQuestions++;
+
+      const progress = (answeredQuestions / totalQuestions) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    // Form Submit Handler
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Validate required fields
+      if (!document.getElementById('generalRatingValue').value ||
+          !document.getElementById('productQuality').value ||
+          !document.getElementById('customerServiceValue').value ||
+          !document.querySelector('input[name="recommendation"]:checked') ||
+          !document.getElementById('deliveryTime').value ||
+          !document.querySelector('textarea[name="improvements"]').value.trim()) {
+        alert('Por favor, completa todas las preguntas obligatorias.');
+        return;
+      }
+
+      // Show success modal
+      document.getElementById('successModal').classList.add('show');
+
+      // Start countdown
+      startCountdown();
+
+      // Reset form
+      this.reset();
+      document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+      document.querySelectorAll('.emoji-option').forEach(emoji => emoji.classList.remove('selected'));
+      document.querySelectorAll('.radio-option').forEach(radio => radio.classList.remove('selected'));
+      document.querySelectorAll('.checkbox-option').forEach(checkbox => checkbox.classList.remove('selected'));
+      document.getElementById('progressBar').style.width = '0%';
+    });
+
+    // Countdown and redirect
+    let countdownInterval;
+
+    function startCountdown() {
+      let seconds = 5;
+      const countdownElement = document.getElementById('countdown');
+
+      countdownInterval = setInterval(() => {
+        seconds--;
+        countdownElement.textContent = seconds;
+
+        if (seconds <= 0) {
+          clearInterval(countdownInterval);
+          window.location.href = 'index.html';
+        }
+      }, 1000);
+    }
+
+    // Redirect immediately
+    function redirectNow() {
+      clearInterval(countdownInterval);
+      window.location.href = 'index.html';
+    }
+
+    // Update progress on textarea input
+    document.querySelectorAll('textarea').forEach(textarea => {
+      textarea.addEventListener('input', updateProgress);
+    });
+  </script>
+</body>
+</html>

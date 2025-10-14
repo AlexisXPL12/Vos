@@ -6,150 +6,557 @@
   <title>Productos – VOS Y SOLO VOS</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Fonts: Poppins -->
+  <!-- Google Fonts: Poppins & Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <!-- Tu CSS personalizado -->
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Estilo para las tarjetas de productos */
-    .card {
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: none;
-      border-radius: 10px;
+    :root {
+      --primary-color: #3e2723;
+      --secondary-color: #5d4037;
+      --accent-color: #d4a574;
+      --light-bg: #faf8f6;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #faf8f6 0%, #f5f1ed 100%);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero-productos {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      padding: 80px 0 60px;
+      position: relative;
       overflow: hidden;
-      margin-bottom: 20px;
     }
 
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    .hero-productos::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      animation: float 20s ease-in-out infinite;
     }
 
-    .card-img-top {
-      height: 250px;
+    .hero-productos::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50%;
+      animation: float 15s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(30px, 30px) rotate(180deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Productos Section */
+    .productos {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, var(--accent-color), #c49563);
+      color: white;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Tarjetas de Productos */
+    .product-card {
+      position: relative;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      height: 280px;
+      background: #f5f5f5;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .product-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+
+    .quick-view {
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease 0.1s;
+    }
+
+    .product-card:hover .quick-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-color);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(212, 165, 116, 0.4);
+    }
+
+    .card-body {
+      padding: 28px 24px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+      transition: color 0.3s ease;
+    }
+
+    .product-card:hover .card-title {
+      color: var(--accent-color);
+    }
+
+    .card-text {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .product-features {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .feature-tag {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .feature-tag i {
+      color: var(--accent-color);
+      font-size: 0.9rem;
     }
 
     .btn-dark {
-      background-color: #3e2723;
-      border-color: #3e2723;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-dark::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn-dark:hover::before {
+      width: 300px;
+      height: 300px;
     }
 
     .btn-dark:hover {
-      background-color: #2d1b18;
-      border-color: #2d1b18;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(62, 39, 35, 0.3);
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
     }
 
-    .productos {
-      padding: 60px 0;
+    /* Animaciones de entrada */
+    .product-card {
+      animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    .product-card:nth-child(1) { animation-delay: 0.1s; }
+    .product-card:nth-child(2) { animation-delay: 0.2s; }
+    .product-card:nth-child(3) { animation-delay: 0.3s; }
+    .product-card:nth-child(4) { animation-delay: 0.4s; }
+    .product-card:nth-child(5) { animation-delay: 0.5s; }
+    .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .product-image-wrapper {
+        height: 220px;
+      }
+
+      .card-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* Decorative elements */
+    .decorative-shape {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.05;
+    }
+
+    .shape-1 {
+      top: 10%;
+      left: 5%;
+      width: 200px;
+      height: 200px;
+      background: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .shape-2 {
+      bottom: 15%;
+      right: 8%;
+      width: 150px;
+      height: 150px;
+      background: var(--accent-color);
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     }
   </style>
 </head>
-<body class="bg-light">
+<body>
   <!-- Header dinámico -->
   <header id="header"></header>
 
+  <!-- Hero Section -->
+  <section class="hero-productos">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Nuestra Colección</h1>
+        <p>Descubre muebles únicos que transformarán cada espacio de tu hogar en un lugar especial</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Sección de productos -->
-  <section class="productos py-5">
-    <div class="container text-center">
-      <h2 class="display-6 fw-bold mb-5">Nuestros Muebles</h2>
+  <section class="productos">
+    <div class="decorative-shape shape-1"></div>
+    <div class="decorative-shape shape-2"></div>
+    
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-badge">Catálogo Premium</span>
+      </div>
+      
       <div class="row g-4">
         <!-- Producto 1: Sofá moderno -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img
-              src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=600"
-              class="card-img-top"
-              alt="Sofá moderno"
-            >
+        <div class="col-lg-4 col-md-6">
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <span class="product-badge">Destacado</span>
+              <img
+                src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Sofá moderno"
+              >
+              <div class="product-overlay">
+                <div class="quick-view">
+                  <i class="bi bi-eye"></i>
+                  Vista rápida
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h3 class="card-title">Sofá Moderno</h3>
-              <p class="card-text">Confort y elegancia en tu sala. Diseño ergonómico y materiales de alta calidad.</p>
-              <a href="#" class="btn btn-dark">Ver detalles</a>
+              <div class="product-features">
+                <span class="feature-tag"><i class="bi bi-star-fill"></i> Premium</span>
+                <span class="feature-tag"><i class="bi bi-shield-check"></i> 5 años</span>
+              </div>
+              <p class="card-text">Confort y elegancia en tu sala. Diseño ergonómico y materiales de alta calidad para tu descanso perfecto.</p>
+              <a href="sofas.html" class="btn btn-dark w-100">Ver detalles</a>
             </div>
           </div>
         </div>
 
         <!-- Producto 2: Mesa de comedor -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img
-              src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=600"
-              class="card-img-top"
-              alt="Mesa de comedor"
-            >
+        <div class="col-lg-4 col-md-6">
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <span class="product-badge">Nuevo</span>
+              <img
+                src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Mesa de comedor"
+              >
+              <div class="product-overlay">
+                <div class="quick-view">
+                  <i class="bi bi-eye"></i>
+                  Vista rápida
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h3 class="card-title">Mesa de Comedor</h3>
-              <p class="card-text">Diseño que une a la familia. Fabricada en madera maciza con acabado premium.</p>
-              <a href="#" class="btn btn-dark">Ver detalles</a>
+              <div class="product-features">
+                <span class="feature-tag"><i class="bi bi-tree"></i> Madera maciza</span>
+                <span class="feature-tag"><i class="bi bi-award"></i> Exclusivo</span>
+              </div>
+              <p class="card-text">Diseño que une a la familia. Fabricada en madera maciza con acabado premium y detalles artesanales.</p>
+              <a href="mesas.html" class="btn btn-dark w-100">Ver detalles</a>
             </div>
           </div>
         </div>
 
         <!-- Producto 3: Cama premium -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img
-              src="https://images.pexels.com/photos/271795/pexels-photo-271795.jpeg?auto=compress&cs=tinysrgb&w=600"
-              class="card-img-top"
-              alt="Cama Premium"
-            >
+        <div class="col-lg-4 col-md-6">
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <span class="product-badge">Bestseller</span>
+              <img
+                src="https://images.pexels.com/photos/271795/pexels-photo-271795.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Cama Premium"
+              >
+              <div class="product-overlay">
+                <div class="quick-view">
+                  <i class="bi bi-eye"></i>
+                  Vista rápida
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h3 class="card-title">Cama Premium</h3>
-              <p class="card-text">Duerme con el máximo confort. Colchón ortopédico y estructura resistente.</p>
-              <a href="#" class="btn btn-dark">Ver detalles</a>
+              <div class="product-features">
+                <span class="feature-tag"><i class="bi bi-moon-stars"></i> Confort</span>
+                <span class="feature-tag"><i class="bi bi-check-circle"></i> Ortopédico</span>
+              </div>
+              <p class="card-text">Duerme con el máximo confort. Colchón ortopédico y estructura resistente para un descanso reparador.</p>
+              <a href="camas.html" class="btn btn-dark w-100">Ver detalles</a>
             </div>
           </div>
         </div>
 
         <!-- Producto 4: Silla ergonómica -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img
-              src="https://http2.mlstatic.com/D_NQ_NP_985712-MPE76952060995_062024-O-silla-ergonomica-de-oficina-silla-de-computadora-ejec.webp"
-              class="card-img-top"
-              alt="Silla ergonómica"
-            >
+        <div class="col-lg-4 col-md-6">
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <span class="product-badge">Popular</span>
+              <img
+                src="https://http2.mlstatic.com/D_NQ_NP_985712-MPE76952060995_062024-O-silla-ergonomica-de-oficina-silla-de-computadora-ejec.webp"
+                alt="Silla ergonómica"
+              >
+              <div class="product-overlay">
+                <div class="quick-view">
+                  <i class="bi bi-eye"></i>
+                  Vista rápida
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h3 class="card-title">Silla Ergonómica</h3>
-              <p class="card-text">Ideal para oficina o hogar. Ajustable y con soporte lumbar.</p>
-              <a href="#" class="btn btn-dark">Ver detalles</a>
+              <div class="product-features">
+                <span class="feature-tag"><i class="bi bi-gear"></i> Ajustable</span>
+                <span class="feature-tag"><i class="bi bi-heart-pulse"></i> Lumbar</span>
+              </div>
+              <p class="card-text">Ideal para oficina o hogar. Ajustable con soporte lumbar y diseño que cuida tu postura durante horas.</p>
+              <a href="#" class="btn btn-dark w-100">Ver detalles</a>
             </div>
           </div>
         </div>
 
         <!-- Producto 5: Estantería moderna -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img
-              src="https://www.angelcerda.com/magazine/wp-content/uploads/2024/04/estanter%C3%ADa3220-650x420.jpg"
-              class="card-img-top"
-              alt="Estantería moderna"
-            >
+        <div class="col-lg-4 col-md-6">
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <span class="product-badge">Moderno</span>
+              <img
+                src="https://www.angelcerda.com/magazine/wp-content/uploads/2024/04/estanter%C3%ADa3220-650x420.jpg"
+                alt="Estantería moderna"
+              >
+              <div class="product-overlay">
+                <div class="quick-view">
+                  <i class="bi bi-eye"></i>
+                  Vista rápida
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h3 class="card-title">Estantería Moderna</h3>
-              <p class="card-text">Amplio espacio de almacenamiento. Diseño minimalista y resistente.</p>
-              <a href="#" class="btn btn-dark">Ver detalles</a>
+              <div class="product-features">
+                <span class="feature-tag"><i class="bi bi-box"></i> Amplia</span>
+                <span class="feature-tag"><i class="bi bi-brush"></i> Minimalista</span>
+              </div>
+              <p class="card-text">Amplio espacio de almacenamiento. Diseño minimalista y resistente para organizar con estilo.</p>
+              <a href="#" class="btn btn-dark w-100">Ver detalles</a>
             </div>
           </div>
         </div>
 
         <!-- Producto 6: Mueble de TV -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img
-              src="https://colineal.pe/cdn/shop/articles/ventajas-tener-mueble-tv-moderno.jpg?crop=center&height=1200&v=1676389831&width=1200"
-              class="card-img-top"
-              alt="Mueble de TV"
-            >
+        <div class="col-lg-4 col-md-6">
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <span class="product-badge">Elegante</span>
+              <img
+                src="https://colineal.pe/cdn/shop/articles/ventajas-tener-mueble-tv-moderno.jpg?crop=center&height=1200&v=1676389831&width=1200"
+                alt="Mueble de TV"
+              >
+              <div class="product-overlay">
+                <div class="quick-view">
+                  <i class="bi bi-eye"></i>
+                  Vista rápida
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h3 class="card-title">Mueble de TV</h3>
-              <p class="card-text">Organiza tu sala de estar. Con compartimentos para accesorios.</p>
-              <a href="#" class="btn btn-dark">Ver detalles</a>
+              <div class="product-features">
+                <span class="feature-tag"><i class="bi bi-tv"></i> Funcional</span>
+                <span class="feature-tag"><i class="bi bi-grid-3x3"></i> Compartimentos</span>
+              </div>
+              <p class="card-text">Organiza tu sala de estar. Con compartimentos para todos tus accesorios y cables ocultos.</p>
+              <a href="#" class="btn btn-dark w-100">Ver detalles</a>
             </div>
           </div>
         </div>

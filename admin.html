@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - VOS Y SOLO VOS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3e2723 0%, #5d4037 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      max-width: 450px;
+      width: 100%;
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-header {
+      background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+      padding: 40px 30px;
+      text-align: center;
+      color: #1a1a1a;
+    }
+
+    .login-header i {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
+
+    .login-header h2 {
+      font-weight: 700;
+      margin-bottom: 5px;
+      font-size: 1.8rem;
+    }
+
+    .login-body {
+      padding: 40px 30px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 2px solid #e0e0e0;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: #ffc107;
+      box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+    }
+
+    .input-group-text {
+      background: #f5f5f5;
+      border: 2px solid #e0e0e0;
+      border-right: none;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .input-group .form-control {
+      border-left: none;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .btn-login {
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #3e2723 0%, #5d4037 100%);
+      border: none;
+      transition: all 0.3s;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(62, 39, 35, 0.3);
+      background: linear-gradient(135deg, #2c1b18 0%, #4a2f28 100%);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #3e2723;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .back-link a:hover {
+      color: #ffc107;
+    }
+
+    .alert {
+      border-radius: 10px;
+      display: none;
+    }
+
+    .lock-icon {
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <i class="bi bi-shield-lock-fill lock-icon"></i>
+      <h2>Panel Administrador</h2>
+      <p class="mb-0">VOS Y SOLO VOS</p>
+    </div>
+    <div class="login-body">
+      <div class="alert alert-danger" id="errorAlert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <span id="errorMessage">Usuario o contraseña incorrectos</span>
+      </div>
+      
+      <form id="loginForm">
+        <div class="mb-3">
+          <label for="username" class="form-label">
+            <i class="bi bi-person-fill me-1"></i>Usuario
+          </label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-person"></i>
+            </span>
+            <input type="text" class="form-control" id="username" placeholder="Ingresa tu usuario" required>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label">
+            <i class="bi bi-lock-fill me-1"></i>Contraseña
+          </label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-lock"></i>
+            </span>
+            <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-login btn-dark w-100">
+          <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+        </button>
+      </form>
+
+      <div class="back-link">
+        <a href="index.html">
+          <i class="bi bi-arrow-left me-1"></i>Volver al sitio principal
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const errorAlert = document.getElementById('errorAlert');
+    const togglePassword = document.getElementById('togglePassword');
+
+    // Toggle password visibility
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+      togglePassword.innerHTML = type === 'password' 
+        ? '<i class="bi bi-eye"></i>' 
+        : '<i class="bi bi-eye-slash"></i>';
+    });
+
+    // Login form submission
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      // Validación simple
+      if (username === 'admin' && password === 'admin') {
+        // Login exitoso
+        errorAlert.style.display = 'none';
+        
+        // Animación de éxito
+        const loginContainer = document.querySelector('.login-container');
+        loginContainer.style.transform = 'scale(0.95)';
+        loginContainer.style.opacity = '0.8';
+        
+        setTimeout(() => {
+          window.location.href = 'admin-panel.html';
+        }, 500);
+      } else {
+        // Login fallido
+        errorAlert.style.display = 'block';
+        loginForm.classList.add('shake');
+        
+        setTimeout(() => {
+          loginForm.classList.remove('shake');
+        }, 500);
+      }
+    });
+
+    // Shake animation
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+      }
+      .shake {
+        animation: shake 0.5s;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

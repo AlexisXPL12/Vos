@@ -9,74 +9,407 @@
   <!-- Google Fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <!-- Tu CSS personalizado -->
   <link rel="stylesheet" href="css/style.css">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
+    :root {
+      --primary-color: #3e2723;
+      --secondary-color: #ffc107;
+      --accent-color: #d4a574;
+      --text-dark: #2c2c2c;
+      --text-light: #6c757d;
     }
 
-    .nosotros {
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero-nosotros {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #5d4037 100%);
+      color: white;
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-nosotros::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h100v100H0z" fill="none"/><path d="M50 0L100 50L50 100L0 50z" fill="rgba(255,255,255,0.03)"/></svg>');
+      opacity: 0.5;
+    }
+
+    .hero-nosotros .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      opacity: 0.9;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Styling */
+    .section-padding {
       padding: 80px 0;
     }
 
     .section-title {
-      text-align: center;
-      margin-bottom: 50px;
+      font-size: 2.5rem;
       font-weight: 700;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
     }
 
-    .card {
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      margin-bottom: 50px;
+    }
+
+    /* Cards */
+    .card-custom {
       border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      margin-bottom: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      height: 100%;
+      background: white;
     }
 
-    .card:hover {
+    .card-custom:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      transition: transform 0.3s ease;
+    }
+
+    .card-custom:hover .card-icon {
+      transform: rotate(5deg) scale(1.1);
+    }
+
+    .card-icon i {
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    /* About Card */
+    .about-card {
+      background: white;
+      border-radius: 30px;
+      padding: 60px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .about-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 40px;
+      font-size: 120px;
+      color: var(--secondary-color);
+      opacity: 0.1;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .about-card p {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Mission Vision Cards */
+    .mv-card {
+      padding: 50px 40px;
+      border-radius: 25px;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background: white;
+      border: none;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
+    }
+
+    .mv-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .mv-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .mv-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     }
 
-    .btn-dark {
-      background-color: #3e2723;
-      border-color: #3e2723;
+    .mv-icon {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, #fff3cd, #ffe69c);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
     }
 
-    .team-member {
+    .mv-icon i {
+      font-size: 2.5rem;
+      color: var(--secondary-color);
+    }
+
+    /* Values Section */
+    .values-card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      height: 100%;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .values-card:hover {
+      border-color: var(--secondary-color);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .value-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+    }
+
+    .value-icon i {
+      font-size: 2rem;
+      color: white;
+    }
+
+    /* Team Section */
+    .team-card {
+      background: white;
+      border-radius: 25px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.4s ease;
+      border: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      height: 100%;
+    }
+
+    .team-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .team-img-wrapper {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 25px;
+      position: relative;
+    }
+
+    .team-img-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      border-radius: 50%;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .team-card:hover .team-img-wrapper::before {
+      opacity: 1;
+    }
+
+    .team-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      transition: transform 0.3s ease;
+    }
+
+    .team-card:hover .team-img {
+      transform: scale(1.05);
+    }
+
+    .team-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+
+    .team-role {
+      color: var(--secondary-color);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .team-description {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #5d4037 100%);
+      color: white;
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .stat-item {
       text-align: center;
       padding: 20px;
     }
 
-    .team-member img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .about-card {
+        padding: 40px 30px;
+      }
+
+      .mv-card {
+        padding: 40px 30px;
+      }
     }
   </style>
 </head>
-<body class="bg-light">
+<body>
   <!-- Header dinámico -->
   <header id="header"></header>
 
-  <!-- Sección: Quiénes Somos -->
-  <section class="nosotros py-5">
+  <!-- Hero Section -->
+  <section class="hero-nosotros">
     <div class="container">
-      <h2 class="section-title display-6">Quiénes Somos</h2>
+      <div class="text-center">
+        <h1 class="hero-title">Nuestra Historia</h1>
+        <p class="hero-subtitle">Transformando espacios, creando experiencias únicas</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Quiénes Somos -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Quiénes Somos</h2>
+        <p class="section-subtitle">Conoce la esencia de VOS Y SOLO VOS</p>
+      </div>
       <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="card p-4 p-md-5">
-            <p class="lead text-center">
+        <div class="col-lg-10">
+          <div class="about-card">
+            <p class="lead text-center mb-4">
               Somos una empresa dedicada al diseño y fabricación de muebles que combinan estilo, funcionalidad y confort.
               En <strong>VOS Y SOLO VOS</strong>, creemos que el hogar es el reflejo de quienes lo habitan, por eso nos enfocamos en crear piezas únicas que transformen tus espacios en lugares llenos de personalidad y calidez.
             </p>
-            <p class="text-center">
+            <p class="text-center mb-0">
               Con más de 10 años de experiencia en el mercado, nos hemos consolidado como una marca confiable, reconocida por la calidad de nuestros materiales y la atención personalizada que ofrecemos a cada cliente.
             </p>
           </div>
@@ -85,30 +418,66 @@
     </div>
   </section>
 
-  <!-- Sección: Misión y Visión -->
-  <section class="py-5 bg-light">
+  <!-- Stats Section -->
+  <section class="stats-section">
     <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">Años de Experiencia</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number">5000+</span>
+            <span class="stat-label">Clientes Satisfechos</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Diseños Únicos</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Compromiso</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Misión y Visión -->
+  <section class="section-padding bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Misión y Visión</h2>
+        <p class="section-subtitle">Nuestro propósito y hacia dónde vamos</p>
+      </div>
       <div class="row g-4">
         <!-- Misión -->
         <div class="col-md-6">
-          <div class="card h-100 p-4">
-            <div class="text-center mb-4">
-              <i class="bi bi-eye fs-1" style="color: #ffc107;"></i>
+          <div class="mv-card">
+            <div class="mv-icon">
+              <i class="bi bi-bullseye"></i>
             </div>
-            <h3 class="text-center mb-3">Nuestra Misión</h3>
-            <p class="text-center">
+            <h3 class="text-center mb-4" style="font-weight: 600;">Nuestra Misión</h3>
+            <p class="text-center mb-0">
               Diseñar y fabricar muebles innovadores que superen las expectativas de nuestros clientes, combinando calidad, estilo y funcionalidad para mejorar sus espacios y calidad de vida.
             </p>
           </div>
         </div>
         <!-- Visión -->
         <div class="col-md-6">
-          <div class="card h-100 p-4">
-            <div class="text-center mb-4">
-              <i class="bi bi-binoculars fs-1" style="color: #ffc107;"></i>
+          <div class="mv-card">
+            <div class="mv-icon">
+              <i class="bi bi-binoculars"></i>
             </div>
-            <h3 class="text-center mb-3">Nuestra Visión</h3>
-            <p class="text-center">
+            <h3 class="text-center mb-4" style="font-weight: 600;">Nuestra Visión</h3>
+            <p class="text-center mb-0">
               Ser líderes en el mercado de muebles de diseño, reconocidos por nuestra excelencia, innovación y compromiso con el medio ambiente, expandiendo nuestra presencia a nivel nacional e internacional.
             </p>
           </div>
@@ -118,32 +487,41 @@
   </section>
 
   <!-- Sección: Valores -->
-  <section class="py-5">
+  <section class="section-padding">
     <div class="container">
-      <h2 class="section-title display-6">Nuestros Valores</h2>
+      <div class="text-center mb-5">
+        <h2 class="section-title">Nuestros Valores</h2>
+        <p class="section-subtitle">Los pilares que nos definen</p>
+      </div>
       <div class="row g-4">
         <!-- Calidad -->
         <div class="col-md-4">
-          <div class="card h-100 p-4 text-center">
-            <i class="bi bi-award fs-2 mb-3" style="color: #ffc107;"></i>
-            <h4>Calidad</h4>
-            <p>Nos comprometemos a utilizar los mejores materiales y procesos para garantizar productos duraderos y de alta gama.</p>
+          <div class="values-card">
+            <div class="value-icon">
+              <i class="bi bi-award"></i>
+            </div>
+            <h4 class="text-center mb-3" style="font-weight: 600;">Calidad</h4>
+            <p class="text-center mb-0">Nos comprometemos a utilizar los mejores materiales y procesos para garantizar productos duraderos y de alta gama.</p>
           </div>
         </div>
         <!-- Innovación -->
         <div class="col-md-4">
-          <div class="card h-100 p-4 text-center">
-            <i class="bi bi-lightbulb fs-2 mb-3" style="color: #ffc107;"></i>
-            <h4>Innovación</h4>
-            <p>Buscamos constantemente nuevas tendencias y tecnologías para ofrecer diseños modernos y funcionales.</p>
+          <div class="values-card">
+            <div class="value-icon">
+              <i class="bi bi-lightbulb"></i>
+            </div>
+            <h4 class="text-center mb-3" style="font-weight: 600;">Innovación</h4>
+            <p class="text-center mb-0">Buscamos constantemente nuevas tendencias y tecnologías para ofrecer diseños modernos y funcionales.</p>
           </div>
         </div>
         <!-- Compromiso -->
         <div class="col-md-4">
-          <div class="card h-100 p-4 text-center">
-            <i class="bi bi-people fs-2 mb-3" style="color: #ffc107;"></i>
-            <h4>Compromiso</h4>
-            <p>Nos enfocamos en las necesidades de nuestros clientes, ofreciendo un servicio personalizado y cercano.</p>
+          <div class="values-card">
+            <div class="value-icon">
+              <i class="bi bi-people"></i>
+            </div>
+            <h4 class="text-center mb-3" style="font-weight: 600;">Compromiso</h4>
+            <p class="text-center mb-0">Nos enfocamos en las necesidades de nuestros clientes, ofreciendo un servicio personalizado y cercano.</p>
           </div>
         </div>
       </div>
@@ -151,35 +529,44 @@
   </section>
 
   <!-- Sección: Nuestro Equipo -->
-  <section class="py-5 bg-light">
+  <section class="section-padding bg-light">
     <div class="container">
-      <h2 class="section-title display-6">Nuestro Equipo</h2>
+      <div class="text-center mb-5">
+        <h2 class="section-title">Nuestro Equipo</h2>
+        <p class="section-subtitle">Las personas detrás de cada diseño</p>
+      </div>
       <div class="row g-4 justify-content-center">
         <!-- Miembro 1 -->
-        <div class="col-md-6 col-lg-3">
-          <div class="card team-member">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Martínez">
-            <h4>Ana Martínez</h4>
-            <p class="text-muted">Diseñadora Principal</p>
-            <p>Especialista en diseño de interiores y creación de muebles personalizados.</p>
+        <div class="col-md-6 col-lg-4">
+          <div class="team-card">
+            <div class="team-img-wrapper">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Martínez" class="team-img">
+            </div>
+            <h4 class="team-name">Ana Martínez</h4>
+            <p class="team-role">Diseñadora Principal</p>
+            <p class="team-description">Especialista en diseño de interiores y creación de muebles personalizados con más de 8 años de experiencia.</p>
           </div>
         </div>
         <!-- Miembro 2 -->
-        <div class="col-md-6 col-lg-3">
-          <div class="card team-member">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos López">
-            <h4>Carlos López</h4>
-            <p class="text-muted">Gerente de Producción</p>
-            <p>Encargado de supervisar la calidad y los procesos de fabricación.</p>
+        <div class="col-md-6 col-lg-4">
+          <div class="team-card">
+            <div class="team-img-wrapper">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos López" class="team-img">
+            </div>
+            <h4 class="team-name">Carlos López</h4>
+            <p class="team-role">Gerente de Producción</p>
+            <p class="team-description">Encargado de supervisar la calidad y los procesos de fabricación, garantizando la excelencia en cada pieza.</p>
           </div>
         </div>
         <!-- Miembro 3 -->
-        <div class="col-md-6 col-lg-3">
-          <div class="card team-member">
-            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura Gómez">
-            <h4>Laura Gómez</h4>
-            <p class="text-muted">Jefa de Ventas</p>
-            <p>Experta en atención al cliente y estrategias de ventas.</p>
+        <div class="col-md-6 col-lg-4">
+          <div class="team-card">
+            <div class="team-img-wrapper">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura Gómez" class="team-img">
+            </div>
+            <h4 class="team-name">Laura Gómez</h4>
+            <p class="team-role">Jefa de Ventas</p>
+            <p class="team-description">Experta en atención al cliente y estrategias de ventas, dedicada a crear experiencias excepcionales.</p>
           </div>
         </div>
       </div>
